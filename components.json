@@ -20,5 +20,7 @@
   "iconLibrary": "lucide",
   "menuColor": "default",
   "menuAccent": "bold",
-  "registries": {}
+  "registries": {
+    "@kokonutui": "https://kokonutui.com/r/{name}.json"
+  }
 }
