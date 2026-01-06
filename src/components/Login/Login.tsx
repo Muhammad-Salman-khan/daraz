@@ -7,20 +7,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/dialog'
-import { Input } from '@/components/input'
-import { Button } from '../button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../tabs'
-import { Link } from '@tanstack/react-router'
+} from '@/components/dialog';
+import { Input } from '@/components/input';
+import { Button } from '../button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../tabs';
+import { Link } from '@tanstack/react-router';
 
 const Login = () => {
   return (
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="link" className="text-white">
-            login
-          </Button>
+          <span className="text-foreground">login</span>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <form>
@@ -69,7 +67,7 @@ const Login = () => {
         </DialogContent>
       </Dialog>
     </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

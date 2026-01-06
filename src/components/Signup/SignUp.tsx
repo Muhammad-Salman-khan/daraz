@@ -1,5 +1,5 @@
-import { Link } from '@tanstack/react-router'
-import { Button } from '../button'
+import { Link } from '@tanstack/react-router';
+import { Button } from '../button';
 import {
   Dialog,
   DialogContent,
@@ -8,26 +8,26 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../dialog'
-import { Input } from '../input'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../tabs'
+} from '../dialog';
+import { Input } from '../input';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../tabs';
 
 const SignUp = () => {
   return (
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="link" className="text-white">
-            Sign Up
-          </Button>
+          <span className="text-foreground ">Sign Up</span>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <form>
             <Tabs defaultValue="account">
               <TabsList className="grid w-full grid-cols-1">
-                <TabsTrigger value="Account">Create An Account</TabsTrigger>
+                <TabsTrigger value="Account">Sign up</TabsTrigger>
               </TabsList>
-
+              <DialogTitle className="flex justify-center align-middle items-center m-3 font-bold ">
+                Create An Account
+              </DialogTitle>
               <TabsContent value="Account" className="mt-6">
                 <DialogHeader className="text-center"></DialogHeader>
                 <div className="grid  gap-6 py-4">
@@ -47,20 +47,6 @@ const SignUp = () => {
                   <Button type="submit">Sign Up</Button>
                 </DialogFooter>
               </TabsContent>
-
-              <TabsContent value="password" className="mt-6">
-                <DialogHeader>
-                  <DialogTitle>Enter Phone Number</DialogTitle>
-                </DialogHeader>
-                <div className="grid gap-6 py-4">
-                  <div className="grid gap-3">
-                    <Input placeholder="Enter your phone Number" />
-                  </div>
-                </div>
-                <DialogFooter>
-                  <Button type="submit">Login</Button>
-                </DialogFooter>
-              </TabsContent>
             </Tabs>
           </form>
           <DialogDescription className="flex gap-2 justify-center align-middle items-center">
@@ -70,7 +56,7 @@ const SignUp = () => {
         </DialogContent>
       </Dialog>
     </>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;
