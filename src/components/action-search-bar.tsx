@@ -11,7 +11,7 @@
  */
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/components/input';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Search,
