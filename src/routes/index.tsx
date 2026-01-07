@@ -1,26 +1,58 @@
 import { Button } from '@/components/button';
+import Cardcategories from '@/components/Card/Cardcategories';
+import Product from '@/components/Card/Product';
+import ClousorComponent from '@/components/Clousor/ClousorComponent';
+import { fetchProduct } from '@/hooks/useProductFetch';
+import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
 
 import { createFileRoute } from '@tanstack/react-router';
-import { Link } from 'lucide-react';
-import { LayoutGrid } from '@/components/layout-grid';
-import Clarousal from '@/components/Clousor/Clarousal';
+const Products = () =>
+  queryOptions({
+    queryKey: ['products'],
+    queryFn: () => fetchProduct(),
+  });
 
 export const Route = createFileRoute('/')({
   component: App,
+  loader: async ({ context: { queryClient } }) => {
+    return queryClient.ensureQueryData(Products());
+  },
 });
-
 function App() {
+  const { data } = useSuspenseQuery(Products());
+  const ControledData = data.slice(0, 5);
+
   return (
     <>
-      <main className="w-full p-3 flex justify-center align-middle items-center">
-        <div className="w-7xl  grid grid-cols-1 lg:grid-cols-[3fr_1fr]">
-          <section className="-z-10">
-            <Clarousal />
+      <main className="w-full min-h-screen  ">
+        <section className="mx-auto max-w-7xl px-6 py-2">
+          <ClousorComponent />
+          <section className="max-w-7xl">
+            <h1 className="mb-4 text-start text-2xl font-semibold tracking-tight">
+              Flash Sales
+            </h1>
+            <div className="flex items-center justify-between rounded-xl text-primary p-5  bg-white shadow-xl">
+              <span className="text-sm font-medium">Limited Time Sale</span>
+              <Button>View Products</Button>
+            </div>
           </section>
-          <div className=" ">
-            <img src="/sideimg.PNG " className="h-80 " />
-          </div>
-        </div>
+          <section className="mt-3 max-w-7xl ">
+            <h1 className="mb-4 text-start text-2xl font-semibold tracking-tight">
+              Categories
+            </h1>
+            <div className="flex flex-wrap justify-center gap-2 rounded-xl text-primary  shadow-xl">
+              <Cardcategories Data={ControledData} />
+            </div>
+          </section>
+          <section className="mt-3 max-w-7xl ">
+            <h1 className="mb-4 text-start text-2xl font-semibold tracking-tight">
+              Products
+            </h1>
+            <div className="flex flex-wrap  gap-2 rounded-xl text-primary ">
+              <Product Data={data} />
+            </div>
+          </section>
+        </section>
       </main>
     </>
   );

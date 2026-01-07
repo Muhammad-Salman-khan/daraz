@@ -184,8 +184,8 @@ function ActionSearchBar({
   }, []);
 
   return (
-    <div className="w-full">
-      <InputGroup className="pl-3 pr-9 bg-accent-foreground w-full py-1.5 h-9 text-sm rounded-lg focus-visible:ring-offset-0">
+    <div className="w-screen ">
+      <InputGroup className="pl-3 pr-9 bg-accent-foreground w-full py-1.5 h-9 text-sm rounded-lg focus-visible:ring-offset-0 z-50">
         <SearchIcon />
         <Input
           type="text"
@@ -208,99 +208,46 @@ function ActionSearchBar({
           className="focus-visible:ring-0 border-none"
         />
       </InputGroup>
-      <div className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-full">
-        <AnimatePresence mode="popLayout">
-          {query.length > 0 ? (
-            <motion.div
-              key="send"
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 20, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <Send className="w-4 h-4 text-gray-400 dark:text-gray-500" />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="search"
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 20, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <Search className="w-4 h-4 text-gray-400 dark:text-gray-500" />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
-      <div className="w-full relative">
-        <AnimatePresence>
-          {isFocused && result && !selectedAction && (
-            <motion.div
-              className="absolute inset-x-0 top-full z-50 w-full border rounded-md shadow-lg overflow-hidden dark:border-gray-800 bg-white dark:bg-black mt-1"
-              variants={ANIMATION_VARIANTS.container}
-              role="listbox"
-              aria-label="Search results"
-              initial="hidden"
-              animate="show"
-              exit="exit"
-            >
-              <motion.ul role="none">
-                {result.actions.map((action) => (
-                  <motion.li
-                    key={action.id}
-                    id={`action-${action.id}`}
-                    className={`px-3 py-2 flex items-center justify-between hover:bg-gray-200 dark:hover:bg-zinc-900 cursor-pointer rounded-md ${
-                      activeIndex === result.actions.indexOf(action)
-                        ? 'bg-gray-100 dark:bg-zinc-800'
-                        : ''
-                    }`}
-                    variants={ANIMATION_VARIANTS.item}
-                    layout
-                    onClick={() => handleActionClick(action)}
-                    role="option"
-                    aria-selected={
-                      activeIndex === result.actions.indexOf(action)
-                    }
-                  >
-                    <div className="flex items-center gap-2 justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="text-gray-500" aria-hidden="true">
-                          {action.icon}
-                        </span>
-                        <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                          {action.label}
-                        </span>
-                        {action.description && (
-                          <span className="text-xs text-gray-400">
-                            {action.description}
-                          </span>
-                        )}
-                      </div>
-                    </div>
+      <AnimatePresence>
+        {isFocused && result && !selectedAction && (
+          <motion.div
+            className="w-full  rounded-md shadow-xs overflow-hidden dark:border-gray-800 bg-white dark:bg-black"
+            variants={ANIMATION_VARIANTS.container}
+            role="alertdialog"
+            aria-label="Search results"
+            initial="hidden"
+            animate="show"
+            exit="exit"
+          >
+            <motion.ul role="alertdialog">
+              {result.actions.map((action) => (
+                <motion.li
+                  key={action.id}
+                  id={`action-${action.id}`}
+                  className={`px-3 py-2 flex items-center justify-between hover:bg-gray-200 dark:hover:bg-zinc-900 cursor-pointer rounded-md ${
+                    activeIndex === result.actions.indexOf(action)
+                      ? 'bg-gray-100 dark:bg-zinc-800'
+                      : ''
+                  }`}
+                  variants={ANIMATION_VARIANTS.item}
+                  layout
+                  onClick={() => handleActionClick(action)}
+                  role="option"
+                  aria-selected={activeIndex === result.actions.indexOf(action)}
+                >
+                  <div className="flex items-center gap-2 justify-between">
                     <div className="flex items-center gap-2">
-                      {action.short && (
-                        <span
-                          className="text-xs text-gray-400"
-                          aria-label={`Keyboard shortcut: ${action.short}`}
-                        >
-                          {action.short}
-                        </span>
-                      )}
-                      {action.end && (
-                        <span className="text-xs text-gray-400 text-right">
-                          {action.end}
-                        </span>
-                      )}
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                        {action.label}
+                      </span>
                     </div>
-                  </motion.li>
-                ))}
-              </motion.ul>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+                  </div>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

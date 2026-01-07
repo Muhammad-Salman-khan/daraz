@@ -26,7 +26,7 @@ export const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   return (
-    <header className="bg-primary text-foreground max-w-full">
+    <header className="bg-primary text-foreground z-50 max-w-full">
       <nav
         data-state={menuState && 'active'}
         className="sticky max-w-full px-2"
