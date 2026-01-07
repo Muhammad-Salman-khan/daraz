@@ -2,6 +2,7 @@ import { Button } from '@/components/button';
 import Cardcategories from '@/components/Card/Cardcategories';
 import Product from '@/components/Card/Product';
 import ClousorComponent from '@/components/Clousor/ClousorComponent';
+import Login from '@/components/Login/Login';
 import { fetchProduct } from '@/hooks/useProductFetch';
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
 
@@ -33,7 +34,9 @@ function App() {
             </h1>
             <div className="flex items-center justify-between rounded-xl text-primary p-5  bg-white shadow-xl">
               <span className="text-sm font-medium">Limited Time Sale</span>
-              <Button>View Products</Button>
+              <Button variant="outline" className="text-primary border-primary">
+                View Products
+              </Button>
             </div>
           </section>
           <section className="mt-3 max-w-7xl ">
@@ -44,13 +47,14 @@ function App() {
               <Cardcategories Data={ControledData} />
             </div>
           </section>
-          <section className="mt-3 max-w-7xl ">
+          <section className="mt-3 mb-4 max-w-7xl ">
             <h1 className="mb-4 text-start text-2xl font-semibold tracking-tight">
               Products
             </h1>
             <div className="flex flex-wrap  gap-2 rounded-xl text-primary ">
               <Product Data={data} />
             </div>
+            <Login />
           </section>
         </section>
       </main>

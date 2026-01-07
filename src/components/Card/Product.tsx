@@ -11,8 +11,6 @@ import { Link } from '@tanstack/react-router';
 import { Star } from 'lucide-react';
 
 const Product = ({ Data }: { Data: DarazProducts }) => {
-  console.log(Data);
-
   return (
     <>
       {Data.map((data) => (

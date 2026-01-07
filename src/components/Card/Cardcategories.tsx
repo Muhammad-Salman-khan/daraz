@@ -10,8 +10,6 @@ import type { DarazProducts } from '@/lib/Schemas/Product';
 import { Link } from '@tanstack/react-router';
 
 const Cardcategories = ({ Data }: { Data: DarazProducts }) => {
-  console.log(Data);
-
   return (
     <>
       {Data.map((data) => (

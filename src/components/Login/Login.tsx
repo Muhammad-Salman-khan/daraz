@@ -12,7 +12,6 @@ import { Input } from '@/components/input';
 import { Button } from '../button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../tabs';
 import { Link } from '@tanstack/react-router';
-
 const Login = () => {
   return (
     <>
