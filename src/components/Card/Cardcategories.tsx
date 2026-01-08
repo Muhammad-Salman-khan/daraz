@@ -13,32 +13,24 @@ const Cardcategories = ({ Data }: { Data: DarazProducts }) => {
   return (
     <>
       {Data.map((data) => (
-        <Link
-          key={data.id}
-          to="/products/$id"
-          params={{ id: data.id }}
-          className="
-            flex
-          w-screen
-            // sm:w-[48%]
-            // md:w-[23%]
-            // lg:w-[18%]
-          "
-        >
-          <Card className="flex flex-col m-1   w-full  overflow-hidden">
-            <CardContent className="p-2 flex flex-col flex-1">
+        <Link key={data.id} to="/products/$id" params={{ id: data.id }}>
+          <Card className="group">
+            <div className="relative aspect-video overflow-hidden bg-slate-100">
               <img
                 src={data.image}
-                alt={data.category}
-                className=" h-60 aspect-square object-cover"
+                alt={data.title}
+                className="w-full h-50 object-cover transition-transform duration-500"
+                loading="lazy"
               />
+            </div>
 
-              <CardTitle className="p-2 flex flex-col flex-1">
-                <h3 className="font-semibold text-sm md:text-base line-clamp-2">
-                  {data.category}
+            <CardHeader className="mt-2">
+              <CardTitle>
+                <h3 className="font-bold text-center text-base md:text-xl text-slate-800 line-clamp-1">
+                  {data.category.toUpperCase()}
                 </h3>
               </CardTitle>
-            </CardContent>
+            </CardHeader>
           </Card>
         </Link>
       ))}

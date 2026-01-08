@@ -21,7 +21,7 @@ export const Route = createFileRoute('/')({
 });
 function App() {
   const { data } = useSuspenseQuery(Products());
-  const ControledData = data.slice(0, 5);
+  const ControledData = data.slice(0, 6);
 
   return (
     <>
@@ -43,7 +43,7 @@ function App() {
             <h1 className="mb-4 text-start text-2xl font-semibold tracking-tight">
               Categories
             </h1>
-            <div className="flex flex-wrap justify-center gap-2 rounded-xl text-primary  shadow-xl">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3 items-stretch">
               <Cardcategories Data={ControledData} />
             </div>
           </section>
@@ -51,7 +51,7 @@ function App() {
             <h1 className="mb-4 text-start text-2xl font-semibold tracking-tight">
               Products
             </h1>
-            <div className="flex flex-wrap  gap-2 rounded-xl text-primary ">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-2">
               <Product Data={data} />
             </div>
           </section>
