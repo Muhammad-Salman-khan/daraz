@@ -15,8 +15,7 @@ const Product = ({ Data }: { Data: DarazProducts }) => {
     <>
       {Data.map((data) => (
         <Link key={data.id} to="/products/$id" params={{ id: data.id }}>
-          <div className="group relative flex flex-col h-full bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-            {/* Image Container with aspect ratio control */}
+          <div className="group relative flex flex-col h-full bg-white rounded-md border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
             <div className="relative aspect-video overflow-hidden bg-slate-100">
               <img
                 src={data.image}

@@ -96,7 +96,6 @@ export const Header = () => {
               </div>
             </div>
           </div>
-          {/* seachbar + logo + cart  */}
           <LogoSearchbar />
         </div>
       </nav>
