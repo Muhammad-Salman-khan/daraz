@@ -5,16 +5,24 @@ import { Link } from '@tanstack/react-router';
 import Login from '../Login/Login';
 import SignUp from '../Signup/SignUp';
 import LogoSearchbar from './LogoSearchbar';
+import { useForm } from '@tanstack/react-form';
 
 const menuItems = [
   { name: 'Save more on App', href: '/' },
   { name: 'Sell ON Daraz', href: '/' },
   { name: 'Help and Support ', href: '' },
-  { name: <Login />, href: '' },
-  { name: <SignUp />, href: '' },
   { name: 'زبان تبدیل کریں', href: '' },
 ];
 export const Header = () => {
+  const l = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+    onSubmit: ({ value }) => {
+      console.log(value);
+    },
+  });
   const [menuState, setMenuState] = React.useState(false);
   const [isScrolled, setIsScrolled] = React.useState(false);
 
@@ -61,6 +69,10 @@ export const Header = () => {
                     </Link>
                   </div>
                 ))}
+                <div className="flex gap-3 p-3 ">
+                  <Login />
+                  <SignUp />
+                </div>
               </div>
             </div>
             <div className="bg-background in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
@@ -76,6 +88,10 @@ export const Header = () => {
                       </Link>
                     </li>
                   ))}
+                  <div className="flex gap-3 p-3 flex-col">
+                    <Login />
+                    <SignUp />
+                  </div>
                 </ul>
               </div>
             </div>

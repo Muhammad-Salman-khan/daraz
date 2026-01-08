@@ -54,7 +54,6 @@ function App() {
             <div className="flex flex-wrap  gap-2 rounded-xl text-primary ">
               <Product Data={data} />
             </div>
-            <Login />
           </section>
         </section>
       </main>
