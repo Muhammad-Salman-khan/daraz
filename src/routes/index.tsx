@@ -43,7 +43,7 @@ function App() {
             <h1 className="mb-4 text-start text-2xl font-semibold tracking-tight">
               Categories
             </h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3 items-stretch">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-2 md:gap-3 items-stretch">
               <Cardcategories Data={ControledData} />
             </div>
           </section>
