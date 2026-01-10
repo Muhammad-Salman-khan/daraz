@@ -30,8 +30,8 @@ function ProductDetailPage() {
       <p>{title}</p>
       <p>{description}</p>
       <p>{price}</p>
-      <p>{image}</p>
       <p>{title}</p>
+      <p>{count}</p>
     </>
   );
 }
