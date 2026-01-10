@@ -12,7 +12,6 @@ import {
   ListRestart,
   LocationEditIcon,
   Lock,
-  LucideStepBack,
   Star,
 } from 'lucide-react';
 const ProductDetail = (e: string) =>
@@ -272,6 +271,55 @@ function ProductDetailPage() {
                 >
                   Go to Store
                 </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto space-y-4">
+          <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
+            <div className="p-4 md:p-6">
+              <h2 className="text-lg md:text-xl font-semibold mb-4 text-slate-800">
+                Product details of Cat Neck Rainbow Ribbon Adjustable Collar
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-none gap-8">
+                <p>{data.description}</p>
+              </div>
+              <div className="mt-2">
+                <div className="mt-4 pt-4 border-t border-slate-100">
+                  <span className="text-xs text-slate-500 block mb-1">
+                    What’s in the box
+                  </span>
+                  <span className="text-sm">1 x {data.title}</span>
+                </div>
+              </div>
+              <div className="p-4 md:p-6">
+                <h2 className="text-lg font-semibold mb-6">
+                  Ratings & Reviews
+                </h2>
+
+                {/* Summary Header */}
+                <div className="flex flex-col md:flex-row gap-8 mb-8">
+                  {/* Left: Score */}
+                  <div className="flex flex-col items-start md:items-start min-w-30">
+                    <div className="text-5xl font-bold text-slate-900">
+                      {data.rating.rate}
+                      <span className="text-2xl text-slate-400 font-normal">
+                        /5
+                      </span>
+                    </div>
+                    <div className="flex text-yellow-400 my-2">
+                      {Array.from({ length: data.rating.rate }).map((_, i) => (
+                        <Star key={i + 1} color="yellow" fill="yellow">
+                          {i + 1}
+                        </Star>
+                      ))}
+                    </div>
+                    <div className="text-sm text-slate-500">
+                      {data.rating.count} Ratings
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
