@@ -6,6 +6,7 @@ import useDebounce from '@/hooks/use-debounce';
 import { InputGroup } from './input-group';
 import { Link } from '@tanstack/react-router';
 import { Label } from 'radix-ui';
+import { Popover, PopoverContent, PopoverTrigger } from './popover';
 
 interface Action {
   id: string;
@@ -169,75 +170,74 @@ function ActionSearchBar({
   }, []);
 
   return (
-    <div className="w-screen ">
-      <InputGroup className="pl-3 pr-9 bg-accent-foreground w-full py-1.5 h-9 text-sm rounded-lg focus-visible:ring-offset-0 z-50">
-        <SearchIcon />
-        <Input
-          type="text"
-          placeholder="Search in Daraz"
-          value={query}
-          onChange={handleInputChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onKeyDown={handleKeyDown}
-          role="combobox"
-          aria-expanded={isFocused && !!result}
-          aria-autocomplete="list"
-          aria-activedescendant={
-            activeIndex >= 0
-              ? `action-${result?.actions[activeIndex]?.id}`
-              : undefined
-          }
-          id="search"
-          autoComplete="on"
-          className="focus-visible:ring-0 border-none"
-        />
-      </InputGroup>
-      <AnimatePresence>
-        {isFocused && result && !selectedAction && (
-          <motion.div
-            className="w-full  rounded-md shadow-xs overflow-hidden dark:border-gray-800 bg-white dark:bg-black"
+    <Popover open={isFocused && !!result && !selectedAction}>
+      <PopoverTrigger asChild>
+        <InputGroup className="relative pl-3 pr-9 bg-accent-foreground text-sm rounded-lg focus-visible:ring-offset-0">
+          <SearchIcon />
+          <Input
+            type="text"
+            placeholder="Search in Daraz"
+            value={query}
+            onChange={handleInputChange}
+            onFocus={handleFocus}
+            onKeyDown={handleKeyDown}
+            role="combobox"
+            aria-expanded={isFocused && !!result}
+            aria-autocomplete="list"
+            aria-activedescendant={
+              activeIndex >= 0
+                ? `action-${result?.actions[activeIndex]?.id}`
+                : undefined
+            }
+            id="search"
+            autoComplete="on"
+            className="focus-visible:ring-0 border-none"
+          />
+        </InputGroup>
+      </PopoverTrigger>
+
+      <PopoverContent
+        className="w-[var(--radix-popover-trigger-width)] p-0 rounded-md shadow-lg overflow-hidden dark:border-gray-800 bg-white dark:bg-black"
+        align="start"
+        sideOffset={4}
+      >
+        <AnimatePresence>
+          <motion.ul
+            role="listbox"
             variants={ANIMATION_VARIANTS.container}
-            role="alertdialog"
-            aria-label="Search results"
             initial="hidden"
             animate="show"
             exit="exit"
           >
-            <motion.ul role="alertdialog">
-              {result.actions.map((action) => (
-                <motion.li
-                  key={action.id}
-                  id={`action-${action.id}`}
-                  className={`px-3 py-2 flex items-center justify-between hover:bg-gray-200 dark:hover:bg-zinc-900 cursor-pointer rounded-md ${
-                    activeIndex === result.actions.indexOf(action)
-                      ? 'bg-gray-100 dark:bg-zinc-800'
-                      : ''
-                  }`}
-                  variants={ANIMATION_VARIANTS.item}
-                  layout
-                  onClick={() => handleActionClick(action)}
-                  role="option"
-                  aria-selected={activeIndex === result.actions.indexOf(action)}
-                >
-                  <div className="flex items-center gap-2 justify-between">
-                    <div className="flex items-center gap-2">
-                      <Link
-                        to="/categories/$id"
-                        params={{ id: action.label }}
-                        className="text-sm font-medium text-gray-900 dark:text-gray-100"
-                      >
-                        {action.label}
-                      </Link>
-                    </div>
-                  </div>
-                </motion.li>
-              ))}
-            </motion.ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+            {result?.actions.map((action, index) => (
+              <motion.li
+                key={action.id}
+                id={`action-${action.id}`}
+                className={`px-3 py-2 flex items-center justify-between hover:bg-gray-200 dark:hover:bg-zinc-900 cursor-pointer ${
+                  activeIndex === index ? 'bg-gray-100 dark:bg-zinc-800' : ''
+                }`}
+                variants={ANIMATION_VARIANTS.item}
+                layout
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => handleActionClick(action)}
+                role="option"
+                aria-selected={activeIndex === index}
+              >
+                <div className="flex items-center gap-2">
+                  <Link
+                    to="/categories/$id"
+                    params={{ id: action.label }}
+                    className="text-sm font-medium text-gray-900 dark:text-gray-100"
+                  >
+                    {action.label}
+                  </Link>
+                </div>
+              </motion.li>
+            ))}
+          </motion.ul>
+        </AnimatePresence>
+      </PopoverContent>
+    </Popover>
   );
 }
 

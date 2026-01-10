@@ -23,7 +23,7 @@ const ShopingCart = () => {
               <h2 className="font-semibold text-lg mb-2">Cart Items</h2>
 
               {cart.length === 0 ? (
-                <p className="text-gray-500 text-sm">Your cart is empty</p>
+                <p className="text-foreground text-sm">Your cart is empty</p>
               ) : (
                 <>
                   <ul className="max-h-60 overflow-y-auto divide-y divide-gray-200 dark:divide-gray-700">
