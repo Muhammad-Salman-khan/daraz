@@ -1,5 +1,6 @@
 import { Button } from '@/components/button';
 import { Share } from '@/components/ShareButton/Share';
+import { useCart } from '@/Context/CartContext';
 import { DeatailedProduct } from '@/hooks/useProductFetch';
 import type { DarazProduct } from '@/lib/Schemas/Product';
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
@@ -29,6 +30,7 @@ export const Route = createFileRoute('/products/$id')({
 function ProductDetailPage() {
   const { id } = Route.useParams();
   const { data } = useSuspenseQuery(ProductDetail(id));
+  const { addToCart }: DarazProduct = useCart();
   return (
     <>
       <div key={id} className=" mt-4 m-auto max-w-7xl">
@@ -133,7 +135,10 @@ function ProductDetailPage() {
               >
                 Buy Now
               </Button>
-              <Button className="flex-1 h-11 bg-primary text-white text-base font-medium rounded-sm shadow-sm transition-colors">
+              <Button
+                onClick={() => addToCart(data)}
+                className="flex-1 h-11 bg-primary text-white text-base font-medium rounded-sm shadow-sm transition-colors"
+              >
                 Add to Cart
               </Button>
             </div>
