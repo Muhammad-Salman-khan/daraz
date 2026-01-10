@@ -33,9 +33,11 @@ function ProductDetailPage() {
     <>
       <div key={id} className=" mt-4 m-auto max-w-7xl">
         <div className="flex  flex-start p-2">
-          <Button className="flex justify-center align-middle items-center">
-            BACK
-          </Button>
+          <Link to="/">
+            <Button className="flex justify-center align-middle items-center">
+              BACK
+            </Button>
+          </Link>
         </div>
 
         <div className="mt-2 p-2 flex flex-col">{window.location.href}</div>
@@ -265,7 +267,6 @@ function ProductDetailPage() {
 
               <div className="text-center">
                 <Link
-                  key={id}
                   to="/"
                   className="text-blue-500 text-xs font-bold uppercase hover:underline"
                 >
