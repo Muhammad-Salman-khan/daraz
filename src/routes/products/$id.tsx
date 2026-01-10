@@ -15,6 +15,7 @@ import {
   Lock,
   Star,
 } from 'lucide-react';
+import { toast } from 'sonner';
 const ProductDetail = (e: string) =>
   queryOptions({
     queryKey: ['productDetail', e],
@@ -136,7 +137,10 @@ function ProductDetailPage() {
                 Buy Now
               </Button>
               <Button
-                onClick={() => addToCart(data)}
+                onClick={() => {
+                  addToCart(data);
+                  toast.success('item added Sucessfully');
+                }}
                 className="flex-1 h-11 bg-primary text-white text-base font-medium rounded-sm shadow-sm transition-colors"
               >
                 Add to Cart

@@ -3,13 +3,14 @@ import { Button } from '../button';
 import { Popover, PopoverContent, PopoverTrigger } from '../popover';
 import { useCart } from '@/Context/CartContext';
 import type { DarazProduct, DarazProducts } from '@/lib/Schemas/Product';
+import { toast } from 'sonner';
 
 const ShopingCart = () => {
   const { cart, RemoveFromCart, Reset } = useCart();
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="ghost">
+        <Button variant="link">
           <ShoppingCartIcon color="white" size={50} />
         </Button>
       </PopoverTrigger>
@@ -40,7 +41,10 @@ const ShopingCart = () => {
                         </div>
 
                         <button
-                          onClick={() => RemoveFromCart(item.id)}
+                          onClick={() => {
+                            RemoveFromCart(item.id);
+                            toast.error(`${item.title} removed Successfully`);
+                          }}
                           className="text-sm text-red-500 hover:underline"
                         >
                           Remove
@@ -50,7 +54,16 @@ const ShopingCart = () => {
                   </ul>
 
                   <button
-                    onClick={() => Reset()}
+                    onClick={() => {
+                      Reset();
+                      if (
+                        window.confirm(
+                          'Are you sure you want to empty your cart',
+                        )
+                      ) {
+                        toast.error('cart is empty');
+                      }
+                    }}
                     className="mt-3 w-full bg-red-500 text-white py-1 rounded hover:bg-red-600"
                   >
                     Clear Cart
