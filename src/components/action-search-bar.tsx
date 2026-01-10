@@ -1,35 +1,15 @@
-'use client';
-
-/**
- * @author: @kokonutui
- * @description: A modern search bar component with action buttons and suggestions
- * @version: 1.0.0
- * @date: 2025-06-26
- * @license: MIT
- * @website: https://kokonutui.com
- * @github: https://github.com/kokonut-labs/kokonutui
- */
-
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Input } from '@/components/input';
 import { motion, AnimatePresence } from 'motion/react';
-import {
-  Search,
-  Send,
-  BarChart2,
-  Video,
-  PlaneTakeoff,
-  AudioLines,
-  LayoutGrid,
-  SearchIcon,
-} from 'lucide-react';
+import { SearchIcon } from 'lucide-react';
 import useDebounce from '@/hooks/use-debounce';
 import { InputGroup } from './input-group';
+import { Link } from '@tanstack/react-router';
+import { Label } from 'radix-ui';
 
 interface Action {
   id: string;
   label: string;
-  icon: React.ReactNode;
   description?: string;
   short?: string;
   end?: string;
@@ -77,14 +57,19 @@ const ANIMATION_VARIANTS = {
 const allActionsSample = [
   {
     id: '1',
-    label: 'Book tickets',
-    icon: <PlaneTakeoff className="h-4 w-4 text-blue-500" />,
+    label: "men's clothing",
   },
   {
     id: '2',
-    label: 'Summarize',
-    icon: <BarChart2 className="h-4 w-4 text-orange-500" />,
-    description: 'gpt-5',
+    label: "women's clothing",
+  },
+  {
+    id: '3',
+    label: 'jewelery',
+  },
+  {
+    id: '4',
+    label: 'electronics',
   },
 ];
 
@@ -237,9 +222,13 @@ function ActionSearchBar({
                 >
                   <div className="flex items-center gap-2 justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                      <Link
+                        to="/categories/$id"
+                        params={{ id: action.label }}
+                        className="text-sm font-medium text-gray-900 dark:text-gray-100"
+                      >
                         {action.label}
-                      </span>
+                      </Link>
                     </div>
                   </div>
                 </motion.li>
