@@ -280,7 +280,7 @@ function ProductDetailPage() {
           <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
             <div className="p-4 md:p-6">
               <h2 className="text-lg md:text-xl font-semibold mb-4 text-slate-800">
-                Product details of Cat Neck Rainbow Ribbon Adjustable Collar
+                Product details of {data.title}
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-none gap-8">
