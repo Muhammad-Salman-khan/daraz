@@ -2,17 +2,14 @@ import { Button } from '@/components/button';
 import Cardcategories from '@/components/Card/Cardcategories';
 import Product from '@/components/Card/Product';
 import ClousorComponent from '@/components/Clousor/ClousorComponent';
-import Login from '@/components/Login/Login';
 import { fetchProduct } from '@/hooks/useProductFetch';
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
-
 import { createFileRoute } from '@tanstack/react-router';
 const Products = () =>
   queryOptions({
     queryKey: ['products'],
     queryFn: () => fetchProduct(),
   });
-
 export const Route = createFileRoute('/')({
   component: App,
   loader: async ({ context: { queryClient } }) => {
@@ -21,7 +18,6 @@ export const Route = createFileRoute('/')({
 });
 function App() {
   const { data } = useSuspenseQuery(Products());
-  const ControledData = data.slice(0, 6);
 
   return (
     <>
@@ -44,7 +40,7 @@ function App() {
               Categories
             </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-2 md:gap-3 items-stretch">
-              <Cardcategories Data={ControledData} />
+              <Cardcategories />
             </div>
           </section>
           <section className="mt-3 mb-4 max-w-7xl ">

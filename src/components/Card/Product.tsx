@@ -26,7 +26,7 @@ const Product = ({ Data }: { Data: DarazProducts }) => {
             </div>
             <div className="flex flex-col grow p-3 ">
               <div className="grow space-y-2">
-                <h3 className="font-bold text-slate-800 text-base md:text-lg line-clamp-2 min-h-12 leading-tight group-hover:text-blue-600 transition-colors">
+                <h3 className="font-bold text-slate-800 sm:text-lg lg:text-md line-clamp-2 min-h-12 leading-tight group-hover:text-blue-600 transition-colors">
                   {data.title}
                 </h3>
               </div>

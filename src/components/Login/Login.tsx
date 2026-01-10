@@ -14,6 +14,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../tabs';
 import { Link } from '@tanstack/react-router';
 import { useForm } from '@tanstack/react-form';
 import { LoginValidation, type LoginValidationType } from '@/lib/Schemas/Login';
+import SignUp from '../Signup/SignUp';
 const Login = () => {
   const form = useForm({
     defaultValues: {
@@ -21,12 +22,20 @@ const Login = () => {
       password: '',
     } as LoginValidationType,
     onSubmit: ({ value }) => {
-      console.log(value);
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (!user) {
+        form.setFieldMeta('email', (meta) => ({
+          ...meta,
+          error: 'No account Found please Login first',
+        }));
+        return;
+      }
     },
     validators: {
       onChange: LoginValidation,
     },
   });
+
   return (
     <>
       <Dialog>
@@ -116,7 +125,10 @@ const Login = () => {
           </Tabs>
           <DialogDescription className="flex gap-2 justify-center align-middle items-center">
             Dont have a account?
-            <Link to="/"> Singup </Link>
+            <Link to="/">
+              {' '}
+              <SignUp />{' '}
+            </Link>
           </DialogDescription>
         </DialogContent>
       </Dialog>

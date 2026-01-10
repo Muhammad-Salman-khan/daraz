@@ -11,9 +11,9 @@ export const fetchProduct = async (): Promise<DarazProducts> => {
     throw Error(error);
   }
 };
-export const fetchCategoryProduct = async (): Promise<DarazProducts> => {
+export const fetchedCategoryProduct = async (e: string) => {
   try {
-    const res = await fetch(`https://fakestoreapi.com/products`);
+    const res = await fetch(`https://fakestoreapi.com/products/category/${e}`);
     if (!res.ok) throw new Error('');
     const data = await res.json();
     return data;

@@ -7,7 +7,8 @@ export const LoginValidation = z.object({
 export type SignUpValidationType = z.infer<typeof SignUpValidation>;
 export const SignUpValidation = z
   .object({
-    username: z.string(),
+    firstName: z.string(),
+    lastName: z.string(),
     email: z.email(),
     password: z.string().min(6, 'Password must be at least 6 characters'),
     confirmPassword: z.string(),
@@ -16,3 +17,9 @@ export const SignUpValidation = z
     message: "password doesn't match",
     path: ['confirmPassword'],
   });
+
+export type AuthCheckType = z.infer<typeof AuthCheck>;
+export const AuthCheck = z.object({
+  email: z.email(),
+  password: z.string(),
+});
