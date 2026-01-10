@@ -39,8 +39,6 @@ function ProductDetailPage() {
             </Button>
           </Link>
         </div>
-
-        <div className="mt-2 p-2 flex flex-col">{window.location.href}</div>
         <div className="grid grid-cols-1 md:grid-cols-1 p-2 lg:grid-cols-12 gap-4">
           <div className="bg-white h-fit p-4 rounded-sm md:col-span-4">
             <div className="w-full ">
