@@ -2,8 +2,8 @@ import { Menu, X } from 'lucide-react';
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Link } from '@tanstack/react-router';
-import Login from '../Login/Login';
-import SignUp from '../Signup/SignUp';
+import Login from '../Auth/Login';
+import SignUp from '../Auth/SignUp';
 import LogoSearchbar from './LogoSearchbar';
 import { useForm } from '@tanstack/react-form';
 

@@ -7,14 +7,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/dialog';
-import { Input } from '@/components/input';
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
 import { Button } from '../button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../tabs';
 import { Link } from '@tanstack/react-router';
 import { useForm } from '@tanstack/react-form';
 import { LoginValidation, type LoginValidationType } from '@/lib/Schemas/Login';
-import SignUp from '../Signup/SignUp';
+import SignUp from './SignUp';
 const Login = () => {
   const form = useForm({
     defaultValues: {

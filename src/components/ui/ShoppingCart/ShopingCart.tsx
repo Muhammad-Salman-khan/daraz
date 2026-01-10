@@ -6,7 +6,7 @@ import type { DarazProduct, DarazProducts } from '@/lib/Schemas/Product';
 import { toast } from 'sonner';
 
 const ShopingCart = () => {
-  const { cart, RemoveFromCart, Reset } = useCart();
+  const { cart, RemoveFromCart, Reset }: any = useCart();
   return (
     <Popover>
       <PopoverTrigger asChild>

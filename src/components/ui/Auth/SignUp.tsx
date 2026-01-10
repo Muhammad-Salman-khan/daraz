@@ -16,7 +16,7 @@ import {
   SignUpValidation,
   type SignUpValidationType,
 } from '@/lib/Schemas/Login';
-import Login from '../Login/Login';
+import Login from './Login';
 
 const SignUp = () => {
   const form = useForm({

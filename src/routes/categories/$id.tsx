@@ -1,5 +1,5 @@
-import { Button } from '@/components/button';
-import Product from '@/components/Card/Product';
+import { Button } from '@/components/ui/button';
+import Product from '@/components/ui/Card/Product';
 import { fetchedCategoryProduct } from '@/hooks/useProductFetch';
 import {
   queryOptions,
@@ -26,8 +26,6 @@ export const Route = createFileRoute('/categories/$id')({
 function RouteComponent() {
   const { id } = Route.useParams();
   const { data } = useSuspenseQuery(FetchedCategory(id));
-  console.log(data);
-
   return (
     <>
       <main className="w-full min-h-screen  ">

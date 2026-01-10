@@ -9,7 +9,7 @@ import {
   CarouselContent,
   CarouselItem,
   type CarouselApi,
-} from '@/components/carousel';
+} from '@/components/ui/carousel';
 
 interface Tip {
   image: string;

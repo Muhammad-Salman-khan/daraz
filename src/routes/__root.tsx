@@ -5,8 +5,8 @@ import { TanStackDevtools } from '@tanstack/react-devtools';
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools';
 
 import type { QueryClient } from '@tanstack/react-query';
-import { Toaster } from '@/components/sonner';
-import { Header } from '@/components/Navbar/Header';
+import { Toaster } from '@/components/ui/sonner';
+import { Header } from '@/components/ui/Navbar/Header';
 
 interface MyRouterContext {
   queryClient: QueryClient;

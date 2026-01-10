@@ -1,6 +1,6 @@
-import { Button } from '@/components/button';
-import { Input } from '@/components/input';
-import { Label } from '@/components/label';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Dialog,
   DialogClose,
@@ -10,10 +10,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/dialog';
+} from '@/components/ui/dialog';
 import { Copy, Share2 } from 'lucide-react';
 import { toast } from 'sonner';
-import { InputGroup } from '@/components/input-group';
+import { InputGroup } from '@/components/ui/input-group';
 
 export function Share() {
   return (

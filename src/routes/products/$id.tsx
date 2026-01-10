@@ -1,5 +1,5 @@
-import { Button } from '@/components/button';
-import { Share } from '@/components/ShareButton/Share';
+import { Button } from '@/components/ui/button';
+import { Share } from '@/components/ui/ShareButton/Share';
 import { useCart } from '@/Context/CartContext';
 import { DeatailedProduct } from '@/hooks/useProductFetch';
 import type { DarazProduct } from '@/lib/Schemas/Product';

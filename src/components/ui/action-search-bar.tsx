@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { Input } from '@/components/input';
+import { Input } from '@/components/ui/input';
 import { motion, AnimatePresence } from 'motion/react';
 import { SearchIcon } from 'lucide-react';
 import useDebounce from '@/hooks/use-debounce';

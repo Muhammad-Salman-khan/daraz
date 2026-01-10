@@ -1,7 +1,7 @@
-import { Button } from '@/components/button';
-import Cardcategories from '@/components/Card/Cardcategories';
-import Product from '@/components/Card/Product';
-import ClousorComponent from '@/components/Clousor/ClousorComponent';
+import { Button } from '@/components/ui/button';
+import Cardcategories from '@/components/ui/Card/Cardcategories';
+import Product from '@/components/ui/Card/Product';
+import ClousorComponent from '@/components/ui/Clousor/ClousorComponent';
 import { fetchProduct } from '@/hooks/useProductFetch';
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
