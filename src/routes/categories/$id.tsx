@@ -1,11 +1,7 @@
 import { Button } from '@/components/ui/button';
 import Product from '@/components/ui/Card/Product';
 import { fetchedCategoryProduct } from '@/hooks/useProductFetch';
-import {
-  queryOptions,
-  useSuspenseQueries,
-  useSuspenseQuery,
-} from '@tanstack/react-query';
+import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import {
   createFileRoute,

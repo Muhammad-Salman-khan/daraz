@@ -1,4 +1,4 @@
-import { Link } from '@tanstack/react-router';
+import { Link, Navigate, useNavigate } from '@tanstack/react-router';
 import { Button } from '../button';
 import {
   Dialog,
@@ -17,8 +17,10 @@ import {
   type SignUpValidationType,
 } from '@/lib/Schemas/Login';
 import Login from './Login';
+import { toast } from 'sonner';
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const form = useForm({
     defaultValues: {
       firstName: '',
@@ -29,7 +31,11 @@ const SignUp = () => {
     } as SignUpValidationType,
     onSubmit: ({ value }) => {
       let user = localStorage.setItem('user', JSON.stringify(value));
-      console.log(value, user);
+      toast.success('User SignUp Successfully');
+      navigate({
+        to: '/',
+        replace: true,
+      });
     },
     validators: {
       onChange: SignUpValidation,
@@ -156,7 +162,9 @@ const SignUp = () => {
                   </div>
                 </div>
                 <DialogFooter>
-                  <Button type="submit">Sign Up</Button>
+                  <Button type="submit" onClick={() => {}}>
+                    Sign Up
+                  </Button>
                 </DialogFooter>
               </TabsContent>
             </form>

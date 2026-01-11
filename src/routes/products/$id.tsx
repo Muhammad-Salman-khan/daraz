@@ -31,7 +31,7 @@ export const Route = createFileRoute('/products/$id')({
 function ProductDetailPage() {
   const { id } = Route.useParams();
   const { data } = useSuspenseQuery(ProductDetail(id));
-  const { addToCart }: DarazProduct = useCart();
+  const { addToCart }: any = useCart();
   return (
     <>
       <div key={id} className=" mt-4 m-auto max-w-7xl">

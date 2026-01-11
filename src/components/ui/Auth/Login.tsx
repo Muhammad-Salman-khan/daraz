@@ -11,24 +11,38 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '../button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../tabs';
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 import { useForm } from '@tanstack/react-form';
 import { LoginValidation, type LoginValidationType } from '@/lib/Schemas/Login';
 import SignUp from './SignUp';
+import { toast } from 'sonner';
 const Login = () => {
+  const navigate = useNavigate();
   const form = useForm({
     defaultValues: {
       email: '',
       password: '',
     } as LoginValidationType,
     onSubmit: ({ value }) => {
-      const user = JSON.parse(localStorage.getItem('user'));
+      const user = JSON.parse(localStorage.getItem('user') || null);
       if (!user) {
         form.setFieldMeta('email', (meta) => ({
           ...meta,
           error: 'No account Found please Login first',
         }));
         return;
+      } else if (
+        user.email === value.email &&
+        user.password === value.password
+      ) {
+        toast.success(`${user.firstName} loggedIn successfully`);
+        navigate({
+          to: '/',
+          replace: true,
+        });
+        return;
+      } else {
+        toast.error('email and password doesnt exists');
       }
     },
     validators: {
