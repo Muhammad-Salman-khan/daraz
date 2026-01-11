@@ -1,4 +1,3 @@
-import { Logo } from '@/components/logo';
 import { Link } from '@tanstack/react-router';
 const links = [
   {
@@ -6,7 +5,7 @@ const links = [
     items: [
       {
         title: 'Features',
-        to: '#',
+        href: '#',
       },
       {
         title: 'Solution',

@@ -1,310 +1,276 @@
-Welcome to your new TanStack app! 
+# Daraz E-Commerce Platform
 
-# Getting Started
+A modern, performant e-commerce application built with React 19, TanStack Router, and TanStack Query. This project demonstrates advanced patterns for building scalable React applications with emphasis on type safety, data fetching optimization, and developer experience.
 
-To run this application:
+## 🏗️ Architecture Overview
+
+### Core Technology Stack
+
+- **React 19** - Latest React version with concurrent features and optimizations
+- **TypeScript** - Full type safety across the application
+- **Vite** - Next-generation frontend tooling for lightning-fast development
+- **TailwindCSS 4** - Utility-first CSS framework for rapid UI development
+
+### Routing & Navigation
+
+**TanStack Router** powers the application's routing system with:
+
+- **File-based routing** - Automatic route generation from file structure
+- **Type-safe navigation** - Full TypeScript support for routes and parameters
+- **Route-level code splitting** - Automatic code splitting via `autoCodeSplitting: true`
+- **Preloading strategies** - Intent-based preloading (`defaultPreload: 'intent'`) for improved perceived performance
+- **Scroll restoration** - Native scroll position restoration on navigation
+- **Structural sharing** - Optimized re-renders with `defaultStructuralSharing`
+
+### State Management & Data Fetching
+
+**TanStack Query (React Query)** manages all server state with:
+
+- **Query integration with routing** - Queries are initiated at the route loader level
+- **Type-safe query context** - Router context provides typed QueryClient access
+- **Automatic cache management** - Smart caching and background refetching
+- **Devtools integration** - Comprehensive debugging via React Query Devtools
+
+#### Why `useSuspenseQuery`?
+
+The application extensively uses `useSuspenseQuery` instead of the standard `useQuery` for several architectural benefits:
+
+1. **Simplified Loading States**: Suspense boundaries handle loading states declaratively, eliminating the need for manual loading checks in components
+2. **Better User Experience**: Route loaders ensure data is fetched before navigation completes, preventing layout shifts and loading spinners
+3. **Type Safety**: When used with `ensureQueryData` in loaders, TypeScript guarantees data is available in components
+4. **Concurrent Rendering**: Leverages React 19's concurrent features for smoother transitions
+5. **Error Boundaries**: Errors are automatically caught by error boundaries rather than requiring error state management in each component
+
+### Local State Management
+
+**React Context API** handles client-side state:
+
+- **CartContext** - Shopping cart state with localStorage persistence
+- **Theme Management** - Dark/light mode support via `next-themes`
+
+### Schema Validation
+
+**Zod** provides runtime type validation:
+
+- Type-safe API response parsing
+- Automatic TypeScript type inference
+- Runtime validation for external data sources
+
+## 🎨 UI Component Architecture
+
+### Design System
+
+- **shadcn/ui** - High-quality, accessible component primitives
+- **Radix UI** - Unstyled, accessible component foundation
+- **Lucide React** - Consistent iconography
+- **Framer Motion** - Smooth animations and transitions
+- **Embla Carousel** - Touch-enabled carousel component
+
+### Component Organization
+
+```
+components/
+├── ui/                    # Reusable UI primitives
+│   ├── Navbar/           # Navigation components
+│   ├── Card/             # Product card variants
+│   ├── ShoppingCart/     # Cart functionality
+│   ├── Auth/             # Authentication UI
+│   └── ...               # Other UI components
+└── footer.tsx            # Global footer
+```
+
+## 🚀 Features
+
+### Product Catalog
+
+- **Dynamic product listings** with responsive grid layouts
+- **Category filtering** with dedicated category pages
+- **Search functionality** with debounced input and keyboard navigation
+- **Product detail pages** with comprehensive information display
+
+### Shopping Cart
+
+- **Add/remove items** with toast notifications (Sonner)
+- **Persistent cart state** via localStorage
+- **Cart preview popover** for quick access
+
+### User Interface
+
+- **Responsive design** - Mobile-first approach with breakpoint optimization
+- **Dark mode support** - System preference aware theming
+- **Animated transitions** - Smooth page transitions and micro-interactions
+- **Accessible components** - WCAG compliant UI elements
+
+### Developer Experience
+
+- **React Compiler** - Automatic memoization via Babel plugin
+- **Hot Module Replacement** - Instant feedback during development
+- **TypeScript strict mode** - Maximum type safety
+- **ESLint + Prettier** - Consistent code formatting
+- **Vitest** - Fast unit testing with React Testing Library
+
+## 📁 Project Structure
+
+```
+src/
+├── routes/                    # File-based routing
+│   ├── __root.tsx            # Layout wrapper
+│   ├── index.tsx             # Home page
+│   ├── products/
+│   │   └── $id.tsx           # Dynamic product detail
+│   └── categories/
+│       └── $id.tsx           # Category filtering
+├── components/               # React components
+├── Context/                  # React Context providers
+├── hooks/                    # Custom React hooks
+│   ├── useProductFetch.ts   # API integration
+│   └── use-debounce.ts      # Input debouncing
+├── integrations/             # Third-party integrations
+│   └── tanstack-query/       # Query client setup
+├── lib/
+│   └── Schemas/              # Zod validation schemas
+└── main.tsx                  # Application entry point
+```
+
+## 🛠️ Development Setup
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm (recommended) or npm
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone <repository-url>
+
+# Install dependencies
 pnpm install
-pnpm start
+
+# Start development server
+pnpm dev
 ```
 
-# Building For Production
+The application runs on `http://localhost:3000` by default.
 
-To build this application for production:
+### Available Scripts
 
 ```bash
+pnpm dev         # Start development server
+pnpm build       # Build for production
+pnpm preview     # Preview production build
+pnpm test        # Run tests
+pnpm lint        # Run ESLint
+pnpm format      # Format code with Prettier
+pnpm check       # Run lint and format
+```
+
+## 🎯 Performance Optimizations
+
+### Code Splitting
+
+- Automatic route-based code splitting via TanStack Router
+- Dynamic imports for heavy components
+- Lazy loading for images with native `loading="lazy"`
+
+### Caching Strategy
+
+- Stale-while-revalidate pattern via React Query
+- Route-level data prefetching with loader patterns
+- LocalStorage persistence for cart state
+
+### Build Optimizations
+
+- React Compiler for automatic optimization
+- Tree shaking via ES modules
+- CSS purging with TailwindCSS
+- Minification and bundling with Vite
+
+## 🧪 Testing Strategy
+
+- **Unit tests** - Component testing with Vitest and React Testing Library
+- **Type safety** - Compile-time guarantees via TypeScript
+- **Accessibility** - Testing Library DOM queries ensure accessible markup
+
+## 📦 API Integration
+
+The application integrates with the [Fake Store API](https://fakestoreapi.com/) for demonstration purposes:
+
+- **Product listings** - `/products` endpoint
+- **Category filtering** - `/products/category/{category}` endpoint
+- **Product details** - `/products/{id}` endpoint
+
+### Custom Hooks
+
+- `fetchProduct()` - Retrieve all products
+- `fetchedCategoryProduct(category)` - Filter by category
+- `DeatailedProduct(id)` - Fetch single product details
+
+## 🎨 Styling Approach
+
+### TailwindCSS Configuration
+
+- **Custom color palette** - Brand-specific colors including primary orange (`daraz-orange`)
+- **Responsive utilities** - Mobile-first breakpoints
+- **Animation utilities** - Custom animations via `tw-animate-css`
+- **Component variants** - Class Variance Authority for component APIs
+
+### Theme System
+
+- System preference detection
+- Manual theme toggle support
+- CSS variables for dynamic theming
+- Dark mode optimized components
+
+## 🔧 Configuration Files
+
+- `vite.config.ts` - Vite configuration with plugin setup
+- `tsconfig.json` - TypeScript compiler options
+- `components.json` - shadcn/ui configuration
+- `tailwind.config.js` - TailwindCSS customization
+- `eslint.config.js` - Linting rules
+- `prettier.config.js` - Code formatting rules
+
+## 🚢 Deployment
+
+The application is configured for deployment on Vercel:
+
+- `vercel.json` contains platform-specific configuration
+- Production builds are optimized for performance
+- Environment variables can be configured in Vercel dashboard
+
+```bash
+# Build for production
 pnpm build
+
+# Preview production build locally
+pnpm preview
 ```
 
-## Testing
+## 📚 Learn More
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
+### Documentation
 
-```bash
-pnpm test
-```
+- [TanStack Router](https://tanstack.com/router) - Modern React routing
+- [TanStack Query](https://tanstack.com/query) - Powerful data synchronization
+- [TailwindCSS](https://tailwindcss.com) - Utility-first CSS
+- [shadcn/ui](https://ui.shadcn.com) - Component library
+- [Vite](https://vitejs.dev) - Build tooling
 
-## Styling
+## 🤝 Contributing
 
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
+Contributions are welcome! Please ensure:
 
+- Code passes TypeScript type checking
+- ESLint and Prettier checks pass
+- Tests are written for new features
+- Components follow the established patterns
 
-## Linting & Formatting
+## 📄 License
 
+This project is intended for educational purposes and demonstrates modern React application architecture.
 
-This project uses [eslint](https://eslint.org/) and [prettier](https://prettier.io/) for linting and formatting. Eslint is configured using [tanstack/eslint-config](https://tanstack.com/config/latest/docs/eslint). The following scripts are available:
+---
 
-```bash
-pnpm lint
-pnpm format
-pnpm check
-```
-
-
-## Shadcn
-
-Add components using the latest version of [Shadcn](https://ui.shadcn.com/).
-
-```bash
-pnpm dlx shadcn@latest add button
-```
-
-
-
-## Routing
-This project uses [TanStack Router](https://tanstack.com/router). The initial setup is a file based router. Which means that the routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add another a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you use the `<Outlet />` component.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { Outlet, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-
-import { Link } from "@tanstack/react-router";
-
-export const Route = createRootRoute({
-  component: () => (
-    <>
-      <header>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-        </nav>
-      </header>
-      <Outlet />
-      <TanStackRouterDevtools />
-    </>
-  ),
-})
-```
-
-The `<TanStackRouterDevtools />` component is not required so you can remove it if you don't want it in your layout.
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-const peopleRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/people",
-  loader: async () => {
-    const response = await fetch("https://swapi.dev/api/people");
-    return response.json() as Promise<{
-      results: {
-        name: string;
-      }[];
-    }>;
-  },
-  component: () => {
-    const data = peopleRoute.useLoaderData();
-    return (
-      <ul>
-        {data.results.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    );
-  },
-});
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-### React-Query
-
-React-Query is an excellent addition or alternative to route loading and integrating it into you application is a breeze.
-
-First add your dependencies:
-
-```bash
-pnpm add @tanstack/react-query @tanstack/react-query-devtools
-```
-
-Next we'll need to create a query client and provider. We recommend putting those in `main.tsx`.
-
-```tsx
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-// ...
-
-const queryClient = new QueryClient();
-
-// ...
-
-if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement);
-
-  root.render(
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
-  );
-}
-```
-
-You can also add TanStack Query Devtools to the root route (optional).
-
-```tsx
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
-const rootRoute = createRootRoute({
-  component: () => (
-    <>
-      <Outlet />
-      <ReactQueryDevtools buttonPosition="top-right" />
-      <TanStackRouterDevtools />
-    </>
-  ),
-});
-```
-
-Now you can use `useQuery` to fetch your data.
-
-```tsx
-import { useQuery } from "@tanstack/react-query";
-
-import "./App.css";
-
-function App() {
-  const { data } = useQuery({
-    queryKey: ["people"],
-    queryFn: () =>
-      fetch("https://swapi.dev/api/people")
-        .then((res) => res.json())
-        .then((data) => data.results as { name: string }[]),
-    initialData: [],
-  });
-
-  return (
-    <div>
-      <ul>
-        {data.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default App;
-```
-
-You can find out everything you need to know on how to use React-Query in the [React-Query documentation](https://tanstack.com/query/latest/docs/framework/react/overview).
-
-## State Management
-
-Another common requirement for React applications is state management. There are many options for state management in React. TanStack Store provides a great starting point for your project.
-
-First you need to add TanStack Store as a dependency:
-
-```bash
-pnpm add @tanstack/store
-```
-
-Now let's create a simple counter in the `src/App.tsx` file as a demonstration.
-
-```tsx
-import { useStore } from "@tanstack/react-store";
-import { Store } from "@tanstack/store";
-import "./App.css";
-
-const countStore = new Store(0);
-
-function App() {
-  const count = useStore(countStore);
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-    </div>
-  );
-}
-
-export default App;
-```
-
-One of the many nice features of TanStack Store is the ability to derive state from other state. That derived state will update when the base state updates.
-
-Let's check this out by doubling the count using derived state.
-
-```tsx
-import { useStore } from "@tanstack/react-store";
-import { Store, Derived } from "@tanstack/store";
-import "./App.css";
-
-const countStore = new Store(0);
-
-const doubledStore = new Derived({
-  fn: () => countStore.state * 2,
-  deps: [countStore],
-});
-doubledStore.mount();
-
-function App() {
-  const count = useStore(countStore);
-  const doubledCount = useStore(doubledStore);
-
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-      <div>Doubled - {doubledCount}</div>
-    </div>
-  );
-}
-
-export default App;
-```
-
-We use the `Derived` class to create a new store that is derived from another store. The `Derived` class has a `mount` method that will start the derived store updating.
-
-Once we've created the derived store we can use it in the `App` component just like we would any other store using the `useStore` hook.
-
-You can find out everything you need to know on how to use TanStack Store in the [TanStack Store documentation](https://tanstack.com/store/latest).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
+**Built with** ❤️ **using React, TanStack, and TypeScript**
