@@ -20,7 +20,7 @@ const Product = ({ Data }: { Data: DarazProducts }) => {
               <img
                 src={data.image}
                 alt={data.title}
-                className="w-full h-50 object-cover transition-transform duration-500"
+                className="w-full h-50 object-contain transition-transform duration-500"
                 loading="lazy"
               />
             </div>

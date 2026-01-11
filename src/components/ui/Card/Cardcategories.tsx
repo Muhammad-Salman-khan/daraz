@@ -29,7 +29,7 @@ const Cardcategories = () => {
               <img
                 src={data.image}
                 alt={data.name}
-                className=" h-50 w-full object-cover transition-transform duration-500"
+                className=" h-50 w-full object-contain transition-transform duration-500"
                 loading="lazy"
               />
             </div>

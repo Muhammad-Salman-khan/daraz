@@ -48,7 +48,7 @@ function ProductDetailPage() {
               <img
                 src={data.image}
                 alt={`${data.title} image`}
-                className="w-full aspect-auto  object-cover cursor-pointer"
+                className="w-full aspect-auto  object-contain cursor-pointer"
               />
             </div>
           </div>
